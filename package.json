@@ -2,10 +2,8 @@
   "name": "potterdb-fn-example-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-  },
   "scripts": {
-    "build": "npm run build:functions",
+    "build": "npm run build:functions && touch ./build/index.html",
     "build:functions": "node build-functions.js",
     "create-app-definition": "contentful-app-scripts create-app-definition",
     "upload": "contentful-app-scripts upload --bundle-dir ./build",
@@ -19,7 +17,11 @@
     "cross-env": "7.0.3",
     "esbuild": "0.20.2",
     "prettier": "3.2.5",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "yargs": "^17.7.2"
   },
-  "homepage": "."
+  "homepage": ".",
+  "dependencies": {
+    "fuse.js": "^7.0.0"
+  }
 }

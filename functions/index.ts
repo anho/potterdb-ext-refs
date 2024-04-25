@@ -1,48 +1,57 @@
-import { FunctionEventHandler as EventHandler } from '@contentful/node-apps-toolkit';
+import { FunctionEventContext } from '@contentful/node-apps-toolkit';
 
-const fieldMappingHandler: EventHandler<'graphql.field.mapping'> = (event, context) => {
-  const fields = event.fields.map(({ contentTypeId, field }) => {
-    return {
-      contentTypeId,
-      fieldId: field.id,
-      graphQLOutputType: 'Character',
-      graphQLQueryField: 'character',
-      graphQLQueryArguments: { slug: '' },
-    };
-  });
+type ResourcesSearchRequest = {
+  type: 'resources.search'
+  resourceType: string
+  query: string
+  limit?: number
+  pages?: {
+    nextCursor: string
+  }
+}
 
+type Scalar = string | number | boolean
+
+type ResourcesLookupRequest<L extends Record<string, Scalar | Scalar[]> = Record<string, Scalar | Scalar[]>> = {
+  type: 'resources.lookup'
+  lookupBy: L
+  resourceType: string
+  limit?: number
+  pages?: {
+    nextCursor: string
+  }
+}
+
+type ResourcesEvent = ResourcesSearchRequest | ResourcesLookupRequest
+
+type ResourcesSearchResponse = {
+  items: object[]
+  pages?: {
+    nextCursor?: string
+  }
+}
+type ResourcesLookupResponse = ResourcesSearchResponse
+
+
+async function lookupHandler(event: ResourcesLookupRequest): Promise<ResourcesLookupResponse> {
   return {
-    namespace: 'PotterDB',
-    fields,
-  };
-};
-
-const queryHandler: EventHandler<'graphql.query'> = async (event, context) => {
-  /*
-   * Forwards the GraphQL query to the PotterDB GraphQL API as is.
-   * The `event` contains a boolean `isIntrospectionQuery` that can be used to
-   * determine if the query is an introspection query. This is useful when
-   * the introspection requires different handling that the actual query.
-   */
-  const response = await fetch('https://api.potterdb.com/graphql', {
-    body: JSON.stringify({
-      query: event.query,
-      operationName: event.operationName,
-      variables: event.variables,
-    }),
-    method: 'POST',
-    headers: { Accept: 'application/json', 'content-type': 'application/json' },
-  });
-
-  return response.json();
-};
-
-export const handler: EventHandler = (event, context) => {
-  if (event.type === 'graphql.field.mapping') {
-    return fieldMappingHandler(event, context);
+    items: []
   }
-  if (event.type === 'graphql.query') {
-    return queryHandler(event, context);
+}
+
+async function searchHandler(event: ResourcesSearchRequest): Promise<ResourcesSearchResponse> {
+  return {
+    items: []
   }
+}
+
+export const handler = (event: ResourcesEvent, _context: FunctionEventContext) => {
+  if (event.type === 'resources.lookup') {
+    return lookupHandler(event);
+  }
+  if (event.type === 'resources.search') {
+    return searchHandler(event);
+  }
+
   throw new Error('Unknown Event');
 };
