@@ -1,11 +1,11 @@
 {
   "functions": [
     {
-      "id": "PotterDB",
+      "id": "externalResources",
       "name": "PotterDB Function",
       "description": "Example Function querying Potter-DB GraphQL API",
-      "path": "functions/index.js",
-      "entryFile": "functions/index.ts",
+      "path": "functions/external-resources.js",
+      "entryFile": "functions/external-resources.ts",
       "allowNetworks": ["api.potterdb.com"],
       "accepts": ["graphql.field.mapping", "graphql.query"]
     }

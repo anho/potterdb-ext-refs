@@ -7,21 +7,25 @@
     "build:functions": "node build-functions.js",
     "create-app-definition": "contentful-app-scripts create-app-definition",
     "upload": "contentful-app-scripts upload --bundle-dir ./build",
-    "upload-ci": "contentful-app-scripts upload --ci --bundle-dir ./build --organization-id $CONTENTFUL_ORG_ID --definition-id $CONTENTFUL_APP_DEF_ID --token $CONTENTFUL_ACCESS_TOKEN"
+    "upload-ci": "contentful-app-scripts upload --ci --bundle-dir ./build --organization-id $CONTENTFUL_ORG_ID --definition-id $CONTENTFUL_APP_DEF_ID --token $CONTENTFUL_ACCESS_TOKEN",
+    "open-settings": "contentful-app-scripts open-settings",
+    "create-resource-entities": "ts-node -T -r dotenv/config ./tools/create-resources.ts"
   },
   "devDependencies": {
     "@contentful/app-scripts": "1.19.0",
     "@contentful/node-apps-toolkit": "3.4.0",
     "@tsconfig/node20": "20.1.4",
     "@types/node": "20.12.7",
+    "contentful-management": "^11.25.2",
     "cross-env": "7.0.3",
     "esbuild": "0.20.2",
     "prettier": "3.2.5",
+    "ts-node": "10.9.2",
     "typescript": "5.4.5",
-    "yargs": "^17.7.2"
+    "yargs": "17.7.2"
   },
   "homepage": ".",
   "dependencies": {
-    "fuse.js": "^7.0.0"
+    "fuse.js": "7.0.0"
   }
 }
