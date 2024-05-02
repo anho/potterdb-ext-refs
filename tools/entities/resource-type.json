@@ -1,0 +1,13 @@
+{
+   "sys": { "id": "PotterDB:Character" },
+   "name": "Character",
+   "resourceCardView": {
+     "title": "{ /slug }",
+     "subtitle": "{ /name } ({ /house } - { /bloodStatus })",
+     "externalUrl": "{ /wiki }",
+     "image": {
+       "url": "{ /image }",
+       "altText": "{ /name }"
+     }
+   }
+ }

@@ -9,7 +9,7 @@
     "upload": "contentful-app-scripts upload --bundle-dir ./build",
     "upload-ci": "contentful-app-scripts upload --ci --bundle-dir ./build --organization-id $CONTENTFUL_ORG_ID --definition-id $CONTENTFUL_APP_DEF_ID --token $CONTENTFUL_ACCESS_TOKEN",
     "open-settings": "contentful-app-scripts open-settings",
-    "create-resource-entities": "ts-node -T -r dotenv/config ./tools/create-resources.ts"
+    "create-resource-entities": "ts-node -T -r dotenv/config ./tools/create-resource-entities.ts"
   },
   "devDependencies": {
     "@contentful/app-scripts": "1.19.0",

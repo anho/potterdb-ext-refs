@@ -1,0 +1,14 @@
+{
+  "sys": {
+    "id": "PotterDB"
+  },
+  "name": "Harry Potter Universe",
+  "type": "function",
+  "function": {
+    "sys": {
+      "type": "Link",
+      "linkType": "Function",
+      "id": "<overwritten-by-script>"
+    }
+  }
+}
